@@ -19,7 +19,7 @@ public class Client {
 	//服务器端的ip地址
 	private static final String IP = "127.0.0.1";
 	//服务器端监听的端口号
-	private static final int PORT = 9009;
+	private static final int PORT = 9020;
 	
 	public static void main(String[] args) {
 		

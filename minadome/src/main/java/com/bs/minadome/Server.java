@@ -14,7 +14,7 @@ import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 public class Server {
 
 	//监听的端口号
-	private static final int PORT = 9009;
+	private static final int PORT = 9020;
 	
 	public static void main(String[] args){
 		
