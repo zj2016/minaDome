@@ -17,7 +17,7 @@ import org.apache.mina.transport.socket.nio.NioSocketConnector;
 public class Client {
 
 	//服务器端的ip地址
-	private static final String IP = "127.0.0.1";
+	private static final String IP = "115.159.100.155";
 	//服务器端监听的端口号
 	private static final int PORT = 9020;
 	
