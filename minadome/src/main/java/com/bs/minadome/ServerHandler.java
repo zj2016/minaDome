@@ -18,7 +18,6 @@ public class ServerHandler extends IoHandlerAdapter{
 	 */
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
-		System.out.println("server messageReceived --- : " + message.toString());
 		broadcast(message.toString(), session);
 	}
 	
@@ -27,7 +26,7 @@ public class ServerHandler extends IoHandlerAdapter{
 	 */
 	@Override
 	public void messageSent(IoSession session, Object message) throws Exception {
-		System.out.println("server messageSent --- : " + message.toString());
+		System.out.println(message.toString());
 	}
 	
 	/**
@@ -35,9 +34,6 @@ public class ServerHandler extends IoHandlerAdapter{
 	 */
 	@Override
 	public void sessionCreated(IoSession session) throws Exception {
-		//sessionMap.put(session.getAttribute("id").toString(), session);
-		broadcast(session.getAttribute("id").toString()+"-create", session);
-		System.out.println("server sessionCreated --- : " + session.getRemoteAddress().toString());
 	}
 	
 	/**
@@ -45,8 +41,6 @@ public class ServerHandler extends IoHandlerAdapter{
 	 */
 	@Override
 	public void sessionClosed(IoSession session) throws Exception {
-		broadcast(session.getAttribute("id").toString()+"-close", session);
-		System.out.println("server sessionClosed --- : " + session.getRemoteAddress().toString());
 	}
 	
 	/**
@@ -64,13 +58,13 @@ public class ServerHandler extends IoHandlerAdapter{
 			if (!sessionMap.containsValue(exceptSession)){
 				//第一次，则注册
 				sessionMap.put(key, exceptSession);
-				exceptSession.write("[SERVER -> ME] " + "注册成功");
+				exceptSession.write("[SERVER] " + "注册成功");
 				return;
 			}
 			
 			IoSession session = sessionMap.get(key);
 			if (session == null) {
-				exceptSession.write("[SERVER -> ME] " + "目标不存在");
+				exceptSession.write("[SERVER] " + "目标不存在");
 			}
 			
 			String exceptKey = null;
@@ -79,18 +73,7 @@ public class ServerHandler extends IoHandlerAdapter{
 					exceptKey = entry.getKey();
 				}
 			}
-			session.write("[" + exceptKey + " --> ME] " + msg);
-			
-			/*for (String key : sessionMap.keySet()) {
-				IoSession session = sessionMap.get(key);
-				if (session.isConnected()) {
-					if (session.equals(exceptSession)) {
-						session.write("[SERVER -> ME] " + msg);
-					} else {
-						session.write("[SERVER -> " + m[0] + "] " + m[1]);
-					}
-				}
-			}*/
+			session.write("[" + exceptKey + "] " + msg);
 		}
 	}
 	

@@ -7,22 +7,17 @@ public class ClientHandler extends IoHandlerAdapter{
 
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
-		
-		System.out.println("client messageReceived --- : " + message.toString());
-		
+		System.out.println(message.toString());
 	}
 	
 	@Override
 	public void messageSent(IoSession session, Object message) throws Exception {
-		
-		System.out.println("client messageSent --- : " + message.toString());
+		//System.out.println(message.toString());
 	}
 	
 	
 	@Override
 	public void sessionCreated(IoSession session) throws Exception {
-		
-		System.out.println("client sessionCreated --- : " + session.getRemoteAddress().toString());
 	}
 	
 }
